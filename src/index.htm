@@ -12,15 +12,28 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-  <title>Hello app</title>
+  <title>Measurement app</title>
 </head>
 
 <body>
-  <h1>Hello</h1>
+  <h1>Measurement</h1>
   <div id="app">
-    <input v-model="name" placeholder="Name">
-    <button v-on:click="sayHello()" class="btn btn-primary">Say hello</button>
-    <div>{{ greeting }}</div>
+     <h2>All measurements</h2>
+
+     <ul>
+       <li v-for="m in measurements">{{m.id}} {{m.temperature}} Humidity: {{m.humidity}} Pressure: {{ m.pressure}}</li>
+     </ul>
+
+    <input v-model="id" placeholder="id" type="number">
+    <button v-on:click="getById(id)" class="btn btn-primary">Get by id</button>
+    <div v-if="measurement">{{ measurement }}</div>
+    <div v-else>No such measurement</div>
+
+    <input v-model.number="addData.pressure" placeholder="pressure" type="number" />
+    <input v-model.number="addData.humidity" placeholder="humidity" type="number" />
+    <input v-model.number="addData.temperature" placeholder="temperature" type="number" />
+    <button v-on:click="add()" class="btn btn-success">Add</button>
+    <div>{{addMessage}}</div>
   </div>
 
   <script src="bundle.js"></script>
